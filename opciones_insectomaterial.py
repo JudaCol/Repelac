@@ -5,6 +5,7 @@ from PyQt5.QtCore import *
 import MySQLdb as mdb
 import registro_insectomaterial
 import buscar_insectomaterial
+import administrar_insectomaterial
 import sys
 
 
@@ -23,8 +24,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
     def boton_acciones(self):
         self.pushButton.clicked.connect(self.click_registro)
         self.pushButton_2.clicked.connect(self.click_consultar)
-        # self.pushButton_3.clicked.connect(self.historia)
-        # self.pushButton_4.clicked.connect(self.actualizar_registro)
+        self.pushButton_3.clicked.connect(self.click_administrar)
 
     def click_registro(self):
         self.close()
@@ -33,6 +33,12 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
     def click_consultar(self):
         self.close()
         self.ui = buscar_insectomaterial.Ui_BuscarWindow()
+
+    def click_administrar(self):
+        self.close()
+        self.ui = administrar_insectomaterial.Ui_AdministrarWindow()
+
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
