@@ -1,6 +1,6 @@
 # Repelac
 Project for Software Engineering II 
-Implemented for:
+Implemented by:
 - Julian David Colmenares
 - Geyner Felipe Rojas
 - Mateo Orozco
