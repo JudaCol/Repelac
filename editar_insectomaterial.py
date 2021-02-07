@@ -8,6 +8,7 @@ import sys
 import xlsxwriter as xls
 import opciones_insectomaterial
 import administrar_insectomaterial
+import actualiza_insectomaterial
 
 class Ui_EditarWindow(QtWidgets.QMainWindow):
     def __init__(self, insecto, material):
@@ -32,13 +33,15 @@ class Ui_EditarWindow(QtWidgets.QMainWindow):
         header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
         header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)
         header.setSectionResizeMode(6, QtWidgets.QHeaderView.Stretch)
-        self.tableWidget.doubleClicked.connect(self.click_row)
+        self.tableWidget.cellClicked.connect(self.click_row)
 
-    def click_row(self, index):
-        row = index.row()
-        column = index.column()
-        idx = table
-        print()
+    def click_row(self, row, column):
+        datas = []
+        for i in range(7):
+            item = self.tableWidget.item(row, i)
+            data = item.text()
+            datas.append(data)
+        self.ui = actualiza_insectomaterial.Ui_ActualizarWindow(datas)
 
 
     def boton_acciones(self):
