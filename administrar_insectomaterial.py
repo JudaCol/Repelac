@@ -6,13 +6,14 @@ import MySQLdb as mdb
 import registro_insectomaterial
 import sys
 import opciones_insectomaterial
-import listar_insectomaterial
+import editar_insectomaterial
+import eliminar_insectomaterial
 
 
-class Ui_BuscarWindow(QtWidgets.QMainWindow):
+class Ui_AdministrarWindow(QtWidgets.QMainWindow):
     def __init__(self):
-        super(Ui_BuscarWindow, self).__init__()  # Call the inherited classes __init__ method
-        uic.loadUi('buscar_insectomaterial.ui', self)
+        super(Ui_AdministrarWindow, self).__init__()  # Call the inherited classes __init__ method
+        uic.loadUi('administrar_insectomaterial.ui', self)
         self.show()
         self.redefineWindow()
         self.combollenado()
@@ -26,7 +27,8 @@ class Ui_BuscarWindow(QtWidgets.QMainWindow):
 
     def boton_acciones(self):
         self.pushButton.clicked.connect(self.atras)
-        self.commandLinkButton.clicked.connect(self.consultar)
+        self.commandLinkButton_3.clicked.connect(self.editar)
+        self.commandLinkButton_2.clicked.connect(self.eliminar)
 
     def atras(self):
         self.close()
@@ -62,17 +64,11 @@ class Ui_BuscarWindow(QtWidgets.QMainWindow):
             finally:
                 ""
 
-    def consultar(self):
-        self.insecto = self.comboBox.currentIndex()
-        self.material = self.comboBox_2.currentIndex()
-        self.close()
-        self.ui = listar_insectomaterial.Ui_ListarWindow(self.insecto, self.material)
-
     def editar(self):
         self.insecto = self.comboBox.currentIndex()
         self.material = self.comboBox_2.currentIndex()
         self.close()
-        self.ui = editar_insectomaterial.Ui_ListarWindow(self.insecto, self.material)
+        self.ui = editar_insectomaterial.Ui_EditarWindow(self.insecto, self.material)
 
     def eliminar(self):
         self.insecto = self.comboBox.currentIndex()
@@ -80,7 +76,8 @@ class Ui_BuscarWindow(QtWidgets.QMainWindow):
         self.close()
         self.ui = eliminar_insectomaterial.Ui_ListarWindow(self.insecto, self.material)
 
+
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    ui = Ui_BuscarWindow()
+    ui = Ui_AdministrarWindow()
     app.exec_()

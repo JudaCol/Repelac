@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>601</width>
-    <height>399</height>
+    <width>604</width>
+    <height>377</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <x>10</x>
       <y>20</y>
       <width>571</width>
-      <height>321</height>
+      <height>301</height>
      </rect>
     </property>
     <property name="font">
@@ -64,8 +64,8 @@
     <widget class="QPushButton" name="pushButton_2">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>200</y>
+       <x>300</x>
+       <y>60</y>
        <width>251</width>
        <height>81</height>
       </rect>
@@ -76,7 +76,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Listar datos insecto-material</string>
+      <string>Consultar datos insecto-material</string>
      </property>
      <property name="autoDefault">
       <bool>false</bool>
@@ -91,8 +91,8 @@
     <widget class="QPushButton" name="pushButton_3">
      <property name="geometry">
       <rect>
-       <x>300</x>
-       <y>60</y>
+       <x>160</x>
+       <y>180</y>
        <width>251</width>
        <height>81</height>
       </rect>
@@ -103,34 +103,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Eliminar datos insecto-material</string>
-     </property>
-     <property name="autoDefault">
-      <bool>false</bool>
-     </property>
-     <property name="default">
-      <bool>false</bool>
-     </property>
-     <property name="flat">
-      <bool>false</bool>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_4">
-     <property name="geometry">
-      <rect>
-       <x>300</x>
-       <y>200</y>
-       <width>251</width>
-       <height>81</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Editar datos insecto-material</string>
+      <string>Administrar datos insecto-material</string>
      </property>
      <property name="autoDefault">
       <bool>false</bool>
@@ -149,7 +122,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>601</width>
+     <width>604</width>
      <height>21</height>
     </rect>
    </property>
