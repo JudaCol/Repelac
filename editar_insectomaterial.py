@@ -32,9 +32,18 @@ class Ui_EditarWindow(QtWidgets.QMainWindow):
         header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
         header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)
         header.setSectionResizeMode(6, QtWidgets.QHeaderView.Stretch)
+        self.tableWidget.doubleClicked.connect(self.click_row)
+
+    def click_row(self, index):
+        row = index.row()
+        column = index.column()
+        idx = table
+        print()
+
 
     def boton_acciones(self):
         self.pushButton.clicked.connect(self.atras)
+
 
     def listar(self):
         con = mdb.connect('localhost', 'root', '', 'quimica')
