@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-02-2021 a las 23:16:39
+-- Tiempo de generación: 07-02-2021 a las 18:53:51
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `quimica`
 --
+CREATE DATABASE IF NOT EXISTS `quimica` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
+USE `quimica`;
 
 -- --------------------------------------------------------
 
@@ -27,12 +29,19 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `t_articulos`
 --
 
-CREATE TABLE `t_articulos` (
+DROP TABLE IF EXISTS `t_articulos`;
+CREATE TABLE IF NOT EXISTS `t_articulos` (
   `nombre_articulo` varchar(500) COLLATE utf8_spanish_ci NOT NULL,
   `autor` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
-  `año` year(4) NOT NULL
+  `año` year(4) NOT NULL,
+  PRIMARY KEY (`nombre_articulo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Truncar tablas antes de insertar `t_articulos`
+--
+
+TRUNCATE TABLE `t_articulos`;
 --
 -- Volcado de datos para la tabla `t_articulos`
 --
@@ -46,12 +55,19 @@ INSERT INTO `t_articulos` (`nombre_articulo`, `autor`, `año`) VALUES
 -- Estructura de tabla para la tabla `t_compuestos`
 --
 
-CREATE TABLE `t_compuestos` (
-  `id_compuesto` int(11) NOT NULL,
+DROP TABLE IF EXISTS `t_compuestos`;
+CREATE TABLE IF NOT EXISTS `t_compuestos` (
+  `id_compuesto` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_compuesto` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
-  `nombrecientif` varchar(150) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `nombrecientif` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id_compuesto`)
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Truncar tablas antes de insertar `t_compuestos`
+--
+
+TRUNCATE TABLE `t_compuestos`;
 --
 -- Volcado de datos para la tabla `t_compuestos`
 --
@@ -107,11 +123,18 @@ INSERT INTO `t_compuestos` (`id_compuesto`, `nombre_compuesto`, `nombrecientif`)
 -- Estructura de tabla para la tabla `t_insectos`
 --
 
-CREATE TABLE `t_insectos` (
-  `id_insecto` int(11) NOT NULL,
-  `nombre_insecto` varchar(150) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+DROP TABLE IF EXISTS `t_insectos`;
+CREATE TABLE IF NOT EXISTS `t_insectos` (
+  `id_insecto` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_insecto` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id_insecto`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Truncar tablas antes de insertar `t_insectos`
+--
+
+TRUNCATE TABLE `t_insectos`;
 --
 -- Volcado de datos para la tabla `t_insectos`
 --
@@ -127,16 +150,26 @@ INSERT INTO `t_insectos` (`id_insecto`, `nombre_insecto`) VALUES
 -- Estructura de tabla para la tabla `t_insectoscompuestos`
 --
 
-CREATE TABLE `t_insectoscompuestos` (
+DROP TABLE IF EXISTS `t_insectoscompuestos`;
+CREATE TABLE IF NOT EXISTS `t_insectoscompuestos` (
   `id_insecto` int(11) NOT NULL,
   `id_compuesto` int(11) NOT NULL,
   `perioprotec` int(11) NOT NULL,
   `porcerepele` float NOT NULL,
   `porcentlanding` float NOT NULL,
   `porcentbiting` float NOT NULL,
-  `nombre_articulo` varchar(500) COLLATE utf8_spanish_ci NOT NULL
+  `nombre_articulo` varchar(500) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id_insecto`,`id_compuesto`),
+  KEY `id_insecto` (`id_insecto`),
+  KEY `id_compuesto` (`id_compuesto`),
+  KEY `articulo_ref` (`nombre_articulo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Truncar tablas antes de insertar `t_insectoscompuestos`
+--
+
+TRUNCATE TABLE `t_insectoscompuestos`;
 --
 -- Volcado de datos para la tabla `t_insectoscompuestos`
 --
@@ -194,53 +227,6 @@ INSERT INTO `t_insectoscompuestos` (`id_insecto`, `id_compuesto`, `perioprotec`,
 (3, 14, 480, 100, 0, 0, 'Repellency effect of forty-one essential oils against Aedes, Anopheles, and Culex mosquitoes'),
 (3, 15, 480, 100, 0, 0, 'Repellency effect of forty-one essential oils against Aedes, Anopheles, and Culex mosquitoes'),
 (3, 16, 480, 100, 0, 0, 'Repellency effect of forty-one essential oils against Aedes, Anopheles, and Culex mosquitoes');
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `t_articulos`
---
-ALTER TABLE `t_articulos`
-  ADD PRIMARY KEY (`nombre_articulo`);
-
---
--- Indices de la tabla `t_compuestos`
---
-ALTER TABLE `t_compuestos`
-  ADD PRIMARY KEY (`id_compuesto`);
-
---
--- Indices de la tabla `t_insectos`
---
-ALTER TABLE `t_insectos`
-  ADD PRIMARY KEY (`id_insecto`);
-
---
--- Indices de la tabla `t_insectoscompuestos`
---
-ALTER TABLE `t_insectoscompuestos`
-  ADD PRIMARY KEY (`id_insecto`,`id_compuesto`),
-  ADD KEY `id_insecto` (`id_insecto`),
-  ADD KEY `id_compuesto` (`id_compuesto`),
-  ADD KEY `articulo_ref` (`nombre_articulo`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `t_compuestos`
---
-ALTER TABLE `t_compuestos`
-  MODIFY `id_compuesto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
-
---
--- AUTO_INCREMENT de la tabla `t_insectos`
---
-ALTER TABLE `t_insectos`
-  MODIFY `id_insecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
