@@ -74,7 +74,7 @@ class Ui_AdministrarWindow(QtWidgets.QMainWindow):
         self.insecto = self.comboBox.currentIndex()
         self.material = self.comboBox_2.currentIndex()
         self.close()
-        self.ui = eliminar_insectomaterial.Ui_ListarWindow(self.insecto, self.material)
+        self.ui = eliminar_insectomaterial.Ui_EliminarWindow(self.insecto, self.material)
 
 
 if __name__ == "__main__":
