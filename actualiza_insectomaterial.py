@@ -5,12 +5,13 @@ from PyQt5.QtCore import *
 import MySQLdb as mdb
 import sys
 import opciones_insectomaterial
+import administrar_insectomaterial
 
 
-class Ui_RegisterWindow(QtWidgets.QMainWindow):
-    def __init__(self):
-        super(Ui_RegisterWindow, self).__init__()  # Call the inherited classes __init__ method
-        uic.loadUi('registro_insectomaterial.ui', self)
+class Ui_ActualizarWindow(QtWidgets.QMainWindow):
+    def __init__(self, datas):
+        super(Ui_ActualizarWindow, self).__init__()  # Call the inherited classes __init__ method
+        uic.loadUi('actualiza_insectomaterial.ui', self)
         self.show()
         self.redefineWindow()
         self.boton_acciones()
@@ -18,8 +19,9 @@ class Ui_RegisterWindow(QtWidgets.QMainWindow):
         self.insecto = ""
         self.material = ""
         self.tipomaterial = ""
-        self.tipo_cambio()
-        self.check_boxes()
+        self.datas = datas
+        # print(datas)
+        self.redefineData(datas)
         self.pprotect = ""
         self.prepelen = ""
         self.planding = ""
@@ -29,16 +31,88 @@ class Ui_RegisterWindow(QtWidgets.QMainWindow):
         self.narticulo = ""
         self.logp = ""
         self.logs = ""
+        self.check_boxes()
 
-
-    def redefineWindow(self):
-        self.setFixedSize(724, 770)
-        self.setWindowIcon(QtGui.QIcon('logo.png'))
-
-    def boton_acciones(self):
-        self.commandLinkButton.clicked.connect(self.agregar)
-        self.pushButton.clicked.connect(self.atras)
-        self.comboBox_4.currentIndexChanged.connect(self.tipo_cambio)
+    def redefineData(self, datas):
+        self.comboBox.setCurrentText(datas[0])
+        self.comboBox_2.setCurrentText(datas[1])
+        con = mdb.connect('localhost', 'root', '', 'quimica')
+        nombre_compuesto = datas[1]
+        with con:
+            cur = con.cursor()
+            try:
+                query = "SELECT tipo_compuesto FROM t_compuestos WHERE nombre_compuesto = '{}'".format(nombre_compuesto)
+                result = cur.execute(query)
+                tipo = cur.fetchall()
+                self.tipomaterial = tipo[0][0]
+                # print(self.tipomaterial)
+                self.comboBox_4.setCurrentIndex(self.tipomaterial - 1)
+            except Exception as e:
+                print(e)
+            finally:
+                ""
+        self.comboBox_3.setCurrentText(datas[6])
+        if datas[2] == 'None':
+            self.spinBox.setDisabled(True)
+            self.checkBox.setChecked(True)
+        else:
+            self.spinBox.setValue(int(datas[2]))
+        if datas[3] == 'None':
+            self.doubleSpinBox.setDisabled(True)
+            self.checkBox_2.setChecked(True)
+        else:
+            self.doubleSpinBox.setValue(float(datas[3]))
+        if datas[4] == 'None':
+            self.doubleSpinBox_2.setDisabled(True)
+            self.checkBox_3.setChecked(True)
+        else:
+            self.doubleSpinBox_2.setValue(float(datas[4]))
+        if datas[5] == 'None':
+            self.doubleSpinBox_3.setDisabled(True)
+            self.checkBox_4.setChecked(True)
+        else:
+            self.doubleSpinBox_3.setValue(float(datas[5]))
+        if datas[6] == 'None':
+            self.doubleSpinBox_5.setDisabled(True)
+            self.checkBox_5.setChecked(True)
+        else:
+            self.doubleSpinBox_5.setValue(float(datas[6]))
+        if datas[7] == 'None':
+            self.doubleSpinBox_6.setDisabled(True)
+            self.checkBox_8.setChecked(True)
+        else:
+            self.doubleSpinBox_6.setValue(float(datas[7]))
+        if self.tipomaterial == 1:
+            self.doubleSpinBox_7.setDisabled(True)
+            self.doubleSpinBox_4.setDisabled(True)
+            self.checkBox_6.setDisabled(True)
+            self.checkBox_7.setDisabled(True)
+        else:
+            con = mdb.connect('localhost', 'root', '', 'quimica')
+            id_insecto = self.comboBox.currentIndex()+1
+            id_compuesto = self.comboBox.currentIndex()+1
+            with con:
+                cur = con.cursor()
+                try:
+                    query = "SELECT logp, logs FROM t_compuestos INNER JOIN t_insectoscompuestos" \
+                            " on t_compuestos.id_compuesto = t_insectoscompuestos.id_compuesto" \
+                            " INNER JOIN t_insectos on t_insectoscompuestos.id_insecto = t_insectos.id_insecto" \
+                            " INNER JOIN t_tipocompuesto on t_compuestos.tipo_compuesto = t_tipocompuesto.id_tipo" \
+                            " WHERE t_insectoscompuestos.id_compuesto = {} and t_insectoscompuestos.id_insecto = {}".format(id_insecto, id_compuesto)
+                    data = cur.execute(query)
+                    rows = cur.fetchall()
+                    self.doubleSpinBox_7.setValue(float(rows[0][0]))
+                    self.doubleSpinBox_4.setValue(float(rows[0][1]))
+                except Exception as e:
+                    print(e)
+                finally:
+                    ""
+        self.insecto = int(self.comboBox.currentIndex()+1)
+        self.material = int(self.comboBox_2.currentIndex()+1)
+        self.comboBox.setEnabled(False)
+        self.comboBox_2.setEnabled(False)
+        self.comboBox_3.setEnabled(False)
+        self.comboBox_4.setEnabled(False)
 
     def check_boxes(self):
         self.checkBox.stateChanged.connect(self.unable_spin)
@@ -122,18 +196,13 @@ class Ui_RegisterWindow(QtWidgets.QMainWindow):
             self.doubleSpinBox_4.setDisabled(False)
             self.logs = ""
 
-    def tipo_cambio(self):
-        tipomaterial = int(self.comboBox_4.currentIndex()+1)
-        if tipomaterial == 1:
-            self.doubleSpinBox_7.setDisabled(True)
-            self.doubleSpinBox_4.setDisabled(True)
-            self.checkBox_7.setEnabled(False)
-            self.checkBox_6.setEnabled(False)
-        elif tipomaterial == 2:
-            self.doubleSpinBox_7.setDisabled(False)
-            self.doubleSpinBox_4.setDisabled(False)
-            self.checkBox_7.setEnabled(True)
-            self.checkBox_6.setEnabled(True)
+    def redefineWindow(self):
+        self.setFixedSize(725, 773)
+        self.setWindowIcon(QtGui.QIcon('logo.png'))
+
+    def boton_acciones(self):
+        self.commandLinkButton.clicked.connect(self.actualizar)
+        self.pushButton.clicked.connect(self.atras)
 
     def combollenado(self):
         con = mdb.connect('localhost', 'root', '', 'quimica')
@@ -149,7 +218,6 @@ class Ui_RegisterWindow(QtWidgets.QMainWindow):
                 print(e)
             finally:
                 ""
-
         con2 = mdb.connect('localhost', 'root', '', 'quimica')
         with con2:
             cur2 = con2.cursor()
@@ -192,15 +260,14 @@ class Ui_RegisterWindow(QtWidgets.QMainWindow):
 
     def atras(self):
         self.close()
-        self.ui = opciones_insectomaterial.Ui_MainWindow()
 
-    def agregar(self):
+    def actualizar(self):
         con = mdb.connect('localhost', 'root', '', 'quimica')
         with con:
             cur = con.cursor()
-            self.insecto = int(self.comboBox.currentIndex()+1)
-            self.material = int(self.comboBox_2.currentIndex()+1)
-            self.tipomaterial = int(self.comboBox_4.currentIndex()+1)
+            insecto = int(self.comboBox.currentIndex()+1)
+            material = int(self.comboBox_2.currentIndex()+1)
+            self.tipomaterial = int(self.comboBox_4.currentIndex() + 1)
             if self.pprotect is None:
                 pass
             else:
@@ -236,24 +303,23 @@ class Ui_RegisterWindow(QtWidgets.QMainWindow):
                 self.logp = self.doubleSpinBox_7.value()
                 self.logs = self.doubleSpinBox_4.value()
             try:
-                sql = 'INSERT INTO t_insectoscompuestos(id_insecto, id_compuesto, perioprotec, porcerepele, porcentlanding, porcentbiting, porceconcetracion, tiempotest, logp, logs, nombre_articulo)' \
-                        'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
+                sql = "UPDATE t_insectoscompuestos" \
+                      " SET id_insecto = %s, id_compuesto = %s, perioprotec = %s, porcerepele = %s, porcentlanding = %s, porcentbiting = %s, porceconcetracion = %s, tiempotest = %s, logp = %s, logs = %s, nombre_articulo = %s" \
+                      " WHERE id_insecto = {} and id_compuesto = {} and nombre_articulo = '{}'".format(self.insecto, self.material, self.narticulo)
                 # print(sql)
-                alo = cur.execute(sql, (self.insecto, self.material, self.pprotect, self.prepelen, self.planding, self.pbitting, self.pconcentracion, self.ttest, self.logp, self.logs, self.narticulo))
+                alo = cur.execute(sql, (insecto, material, self.pprotect, self.prepelen, self.planding, self.pbitting, self.pconcentracion, self.ttest, self.logp, self.logs, self.narticulo))
                 con.commit()
                 if alo:
-                    QMessageBox.about(self, 'Inserción', 'Datos Insertados Correctamente')
+                    QMessageBox.about(self, 'Actualizacion', 'Datos Actualizados Correctamente')
                 else:
                     print('F')
             except Exception as e:
                 print(e)
             finally:
-                pass
                 self.close()
-                self.ui = opciones_insectomaterial.Ui_MainWindow()
 
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    ui = Ui_RegisterWindow()
+    ui = Ui_ActualizarWindow()
     app.exec_()

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1030</width>
+    <width>1374</width>
     <height>508</height>
    </rect>
   </property>
@@ -19,7 +19,7 @@
      <rect>
       <x>10</x>
       <y>20</y>
-      <width>1001</width>
+      <width>1361</width>
       <height>431</height>
      </rect>
     </property>
@@ -39,7 +39,7 @@
       <rect>
        <x>30</x>
        <y>40</y>
-       <width>941</width>
+       <width>1321</width>
        <height>321</height>
       </rect>
      </property>
@@ -74,12 +74,22 @@
      </column>
      <column>
       <property name="text">
-       <string>% Landing</string>
+       <string>% Aterrizaje</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>% Biting</string>
+       <string>% Picadura</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>% Concentración</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Tiempo Testeo</string>
       </property>
      </column>
      <column>
@@ -113,7 +123,7 @@
     <widget class="QCommandLinkButton" name="commandLinkButton">
      <property name="geometry">
       <rect>
-       <x>790</x>
+       <x>1140</x>
        <y>370</y>
        <width>185</width>
        <height>41</height>
@@ -130,7 +140,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1030</width>
+     <width>1374</width>
      <height>21</height>
     </rect>
    </property>

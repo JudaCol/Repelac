@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>485</width>
-    <height>304</height>
+    <width>1372</width>
+    <height>508</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,9 +18,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
-      <width>461</width>
-      <height>241</height>
+      <y>20</y>
+      <width>1351</width>
+      <height>431</height>
      </rect>
     </property>
     <property name="font">
@@ -32,101 +32,83 @@
      <bool>true</bool>
     </property>
     <property name="title">
-     <string>SELECCIONE LOS DATOS A CONSULTAR</string>
+     <string>LISTADO CONSULTADO PARA ELIMINAR</string>
     </property>
-    <widget class="QGroupBox" name="groupBox_2">
+    <widget class="QTableWidget" name="tableWidget">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>30</x>
        <y>40</y>
-       <width>381</width>
-       <height>121</height>
+       <width>1301</width>
+       <height>321</height>
       </rect>
      </property>
-     <property name="title">
-      <string>Información base</string>
+     <property name="sortingEnabled">
+      <bool>true</bool>
      </property>
-     <widget class="QLabel" name="label_2">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>70</y>
-        <width>71</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <attribute name="verticalHeaderDefaultSectionSize">
+      <number>30</number>
+     </attribute>
+     <column>
       <property name="text">
-       <string>Material:</string>
+       <string>Insecto</string>
       </property>
-     </widget>
-     <widget class="QLabel" name="label">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>30</y>
-        <width>71</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
+     </column>
+     <column>
       <property name="text">
-       <string>Insecto:</string>
+       <string>Material</string>
       </property>
-     </widget>
-     <widget class="QComboBox" name="comboBox">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>30</y>
-        <width>151</width>
-        <height>31</height>
-       </rect>
+     </column>
+     <column>
+      <property name="text">
+       <string>P. Protección</string>
       </property>
-     </widget>
-     <widget class="QComboBox" name="comboBox_2">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>70</y>
-        <width>241</width>
-        <height>31</height>
-       </rect>
+     </column>
+     <column>
+      <property name="text">
+       <string>% Repelencia</string>
       </property>
-     </widget>
-    </widget>
-    <widget class="QCommandLinkButton" name="commandLinkButton">
-     <property name="geometry">
-      <rect>
-       <x>350</x>
-       <y>175</y>
-       <width>81</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Listar</string>
-     </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>% Aterrizaje</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>% Picadura</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Nueva columna</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Tiempo Testeo</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Articulo</string>
+      </property>
+     </column>
     </widget>
     <widget class="QPushButton" name="pushButton">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>180</y>
+       <x>30</x>
+       <y>380</y>
        <width>91</width>
        <height>31</height>
       </rect>
      </property>
      <property name="text">
-      <string>Cancelar</string>
+      <string>Atrás</string>
      </property>
      <property name="autoDefault">
       <bool>true</bool>
@@ -135,7 +117,7 @@
       <bool>false</bool>
      </property>
      <property name="flat">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
     </widget>
    </widget>
@@ -145,7 +127,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>485</width>
+     <width>1372</width>
      <height>21</height>
     </rect>
    </property>

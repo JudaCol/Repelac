@@ -22,7 +22,7 @@ class Ui_ListarWindow(QtWidgets.QMainWindow):
         self.consulta = ""
 
     def redefineWindow(self):
-        self.setFixedSize(1030, 508)
+        self.setFixedSize(1374, 508)
         self.setWindowIcon(QtGui.QIcon('logo.png'))
         header = self.tableWidget.horizontalHeader()
         header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
@@ -31,7 +31,9 @@ class Ui_ListarWindow(QtWidgets.QMainWindow):
         header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
         header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
         header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)
-        header.setSectionResizeMode(6, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(6, QtWidgets.QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(7, QtWidgets.QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(8, QtWidgets.QHeaderView.Stretch)
 
     def boton_acciones(self):
         self.pushButton.clicked.connect(self.atras)
@@ -43,22 +45,22 @@ class Ui_ListarWindow(QtWidgets.QMainWindow):
             cur = con.cursor()
             try:
                 if self.insecto == 0 and self.material != 0:
-                    query = "SELECT nombre_insecto, nombre_compuesto, perioprotec, porcerepele, porcentlanding, porcentbiting, nombre_articulo from t_insectoscompuestos" \
+                    query = "SELECT nombre_insecto, nombre_compuesto, perioprotec, porcerepele, porcentlanding, porcentbiting, porceconcetracion, tiempotest, nombre_articulo from t_insectoscompuestos" \
                             " inner join t_insectos on t_insectoscompuestos.id_insecto = t_insectos.id_insecto" \
                             " inner join t_compuestos on t_insectoscompuestos.id_compuesto = t_compuestos.id_compuesto" \
                             " where t_compuestos.id_compuesto = {}".format(self.material)
                 elif self.material == 0 and self.insecto != 0:
-                    query = "SELECT nombre_insecto, nombre_compuesto, perioprotec, porcerepele, porcentlanding, porcentbiting, nombre_articulo from t_insectoscompuestos" \
+                    query = "SELECT nombre_insecto, nombre_compuesto, perioprotec, porcerepele, porcentlanding, porcentbiting, porceconcetracion, tiempotest, nombre_articulo from t_insectoscompuestos" \
                             " inner join t_insectos on t_insectoscompuestos.id_insecto = t_insectos.id_insecto" \
                             " inner join t_compuestos on t_insectoscompuestos.id_compuesto = t_compuestos.id_compuesto" \
                             " where t_insectos.id_insecto = {}".format(self.insecto)
                 elif self.material == 0 and self.insecto == 0:
-                    query = "SELECT nombre_insecto, nombre_compuesto, perioprotec, porcerepele, porcentlanding, porcentbiting, nombre_articulo from t_insectoscompuestos" \
+                    query = "SELECT nombre_insecto, nombre_compuesto, perioprotec, porcerepele, porcentlanding, porcentbiting, porceconcetracion, tiempotest, nombre_articulo from t_insectoscompuestos" \
                             " inner join t_insectos on t_insectoscompuestos.id_insecto = t_insectos.id_insecto" \
                             " inner join t_compuestos on t_insectoscompuestos.id_compuesto = t_compuestos.id_compuesto" \
                             " where t_insectos.id_insecto = t_insectoscompuestos.id_insecto and t_compuestos.id_compuesto = t_insectoscompuestos.id_compuesto"
                 else:
-                    query = "SELECT nombre_insecto, nombre_compuesto, perioprotec, porcerepele, porcentlanding, porcentbiting, nombre_articulo from t_insectoscompuestos" \
+                    query = "SELECT nombre_insecto, nombre_compuesto, perioprotec, porcerepele, porcentlanding, porcentbiting, porceconcetracion, tiempotest, nombre_articulo from t_insectoscompuestos" \
                             " inner join t_insectos on t_insectoscompuestos.id_insecto = t_insectos.id_insecto" \
                             " inner join t_compuestos on t_insectoscompuestos.id_compuesto = t_compuestos.id_compuesto" \
                             " where t_insectos.id_insecto = {} and t_compuestos.id_compuesto = {}".format(self.insecto, self.material)
@@ -73,7 +75,7 @@ class Ui_ListarWindow(QtWidgets.QMainWindow):
                     n_rows = len(rows)
                     self.tableWidget.setRowCount(n_rows)
                     for idx, row in enumerate(rows):
-                        for j in range(7):
+                        for j in range(9):
                             item = QTableWidgetItem(str(row[j]))
                             item.setFlags(QtCore.Qt.ItemIsEnabled)
                             item.setBackground(QtGui.QColor(69, 179, 157))

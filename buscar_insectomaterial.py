@@ -21,7 +21,7 @@ class Ui_BuscarWindow(QtWidgets.QMainWindow):
         self.material = ""
 
     def redefineWindow(self):
-        self.setFixedSize(630, 385)
+        self.setFixedSize(485, 304)
         self.setWindowIcon(QtGui.QIcon('logo.png'))
 
     def boton_acciones(self):
@@ -68,17 +68,18 @@ class Ui_BuscarWindow(QtWidgets.QMainWindow):
         self.close()
         self.ui = listar_insectomaterial.Ui_ListarWindow(self.insecto, self.material)
 
-    def editar(self):
-        self.insecto = self.comboBox.currentIndex()
-        self.material = self.comboBox_2.currentIndex()
-        self.close()
-        self.ui = editar_insectomaterial.Ui_ListarWindow(self.insecto, self.material)
+    # def editar(self):
+    #    self.insecto = self.comboBox.currentIndex()
+    #    self.material = self.comboBox_2.currentIndex()
+    #    self.close()
+    #    self.ui = editar_insectomaterial.Ui_ListarWindow(self.insecto, self.material)
 
-    def eliminar(self):
-        self.insecto = self.comboBox.currentIndex()
-        self.material = self.comboBox_2.currentIndex()
-        self.close()
-        self.ui = eliminar_insectomaterial.Ui_ListarWindow(self.insecto, self.material)
+    # def eliminar(self):
+    #    self.insecto = self.comboBox.currentIndex()
+    #    self.material = self.comboBox_2.currentIndex()
+    #    self.close()
+    #    self.ui = eliminar_insectomaterial.Ui_ListarWindow(self.insecto, self.material)
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
