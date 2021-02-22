@@ -113,6 +113,7 @@ class Ui_EliminaWindow(QtWidgets.QMainWindow):
         self.checkBox_7.setDisabled(True)
         self.doubleSpinBox_5.setDisabled(True)
         self.doubleSpinBox_3.setDisabled(True)
+        self.doubleSpinBox_6.setDisabled(True)
 
     def redefineWindow(self):
         self.setFixedSize(725, 773)
