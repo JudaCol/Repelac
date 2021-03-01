@@ -32,7 +32,7 @@ class Ui_RegisterWindow(QtWidgets.QMainWindow):
 
 
     def redefineWindow(self):
-        self.setFixedSize(724, 770)
+        self.setFixedSize(824, 510)
         self.setWindowIcon(QtGui.QIcon('logo.png'))
 
     def boton_acciones(self):
