@@ -103,6 +103,8 @@ class Ui_ListarWindow(QtWidgets.QMainWindow):
                     row += 1
                 except AttributeError:
                     pass
+        #lf.close()
+        #self.ui = buscar_insectomaterial.Ui_BuscarWindow()
 
     def atras(self):
         self.insecto = ""
