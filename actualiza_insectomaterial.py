@@ -197,7 +197,7 @@ class Ui_ActualizarWindow(QtWidgets.QMainWindow):
             self.logs = ""
 
     def redefineWindow(self):
-        self.setFixedSize(725, 773)
+        self.setFixedSize(725, 688)
         self.setWindowIcon(QtGui.QIcon('logo.png'))
 
     def boton_acciones(self):

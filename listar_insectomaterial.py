@@ -22,7 +22,7 @@ class Ui_ListarWindow(QtWidgets.QMainWindow):
         self.consulta = ""
 
     def redefineWindow(self):
-        self.setFixedSize(1374, 508)
+        self.setFixedSize(1332, 508)
         self.setWindowIcon(QtGui.QIcon('logo.png'))
         header = self.tableWidget.horizontalHeader()
         header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
