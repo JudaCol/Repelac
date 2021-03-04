@@ -141,6 +141,7 @@ CREATE TABLE `t_insectoscompuestos` (
   `tiempotest` float DEFAULT NULL,
   `logp` float DEFAULT NULL,
   `logs` float DEFAULT NULL,
+  `habilitado` int(1) NOT NULL,
   `nombre_articulo` varchar(500) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
